@@ -1,0 +1,55 @@
+#include <stdio.h > 
+#include <ctype.h >  
+double convertGrade(char g) 
+{
+    g = toupper(g);
+    if (g == 'A') return 4.0;
+    else if (g == 'B') return 3.0;
+    else if (g == 'C') return 2.0;
+    else if (g == 'D') return 1.0;
+    else if (g == 'E') return 0.0;
+    else 
+{
+        printf("Invalid grade entered. Defaulting to 0.0\n");
+        return 0.0;
+    }
+}
+
+int main() 
+{
+    int numCourses;
+    printf("Number of courses:");
+    scanf("%d", &numCourses);
+    double sumPoints = 0;
+    int totalCreds = 0;
+    for (int i = 0; i < numCourses ;i++) 
+{
+        int c;
+        char g;
+        printf("\nCourse %d:\n", i + 1);
+        printf("  Credits: ");
+        scanf("%d", &c);
+        if (c <= 0)
+ {
+            printf("  Skipping - invalid credit value.\n");
+            continue;
+        }
+         printf("  Grade (A-E): ");
+        scanf(" %c", &g); 
+       double gp = convertGrade(g);
+        sumPoints += gp * c;
+        totalCreds += c;
+    }
+
+    if (totalCreds > 0)
+ {
+        double cgpa = sumPoints / totalCreds;
+        printf("\nFinal CGPA: %.2f\n", cgpa);
+    }
+ else 
+{
+        printf("\nNo valid credits entered. CGPA cannot be calculated.\n");
+    }
+
+    return 0;
+}
